@@ -5,23 +5,92 @@ import Terminal from './Terminal';
 
 const ReactSandbox = () => {
   const [code, setCode] = useState(`
-function ExampleComponent() {
-  const [count, setCount] = React.useState(0);
+  function ExampleComponent() {
+    const [isPlaying, setIsPlaying] = React.useState(false);
+    const [volume, setVolume] = React.useState(0.5);
+    const audioRef = React.useRef(null);
 
-  return (
-    <div className="p-6 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-lg shadow-lg max-w-sm mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-white">Example Component</h2>
-      <p className="text-lg text-white mb-4">You clicked {count} times</p>
-      <button
-        className="px-6 py-2 bg-white text-indigo-600 font-semibold rounded-full shadow-md hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition-colors duration-200"
-        onClick={() => setCount(count + 1)}
+    React.useEffect(() => {
+      if (audioRef.current) {
+        audioRef.current.volume = volume;
+      }
+    }, [volume]);
+
+    const togglePlay = () => {
+      if (audioRef.current) {
+        if (isPlaying) {
+          audioRef.current.pause();
+        } else {
+          audioRef.current.play();
+        }
+        setIsPlaying(!isPlaying);
+      }
+    };
+
+    return (
+      <div
+        className="p-8 rounded-xl shadow-2xl max-w-md mx-auto"
+        style={{
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          fontFamily: "'Helvetica Neue', sans-serif",
+        }}
       >
-        Click me
-      </button>
-    </div>
-  );
-}
+        <h2
+          className="text-3xl font-bold mb-6 text-white text-center"
+          style={{
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+          }}
+        >
+          Music Player
+        </h2>
+        <div
+          className="bg-white bg-opacity-20 p-6 rounded-lg backdrop-filter backdrop-blur-lg"
+        >
+          <button
+            className="w-full py-3 px-6 mb-4 font-semibold rounded-full text-white transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+            style={{
+              background: isPlaying
+                ? 'linear-gradient(to right, #ff6b6b, #feca57)'
+                : 'linear-gradient(to right, #4facfe, #00f2fe)',
+              boxShadow: '0 4px 15px 0 rgba(65, 132, 234, 0.75)',
+            }}
+            onClick={togglePlay}
+          >
+            {isPlaying ? 'Pause' : 'Play'}
+          </button>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            className="w-full"
+            style={{
+              WebkitAppearance: 'none',
+              appearance: 'none',
+              height: '15px',
+              borderRadius: '5px',
+              background: '#d3d3d3',
+              outline: 'none',
+              opacity: '0.7',
+              transition: 'opacity .2s',
+            }}
+          />
+        </div>
+        <audio
+          ref={audioRef}
+          loop
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        />
+        <div className="mt-6 text-center text-white text-opacity-80">
+         {audioRef.current && audioRef.current.src}
+        </div>
+      </div>
+    );
+  }
   `);
+
   const [error, setError] = useState(null);
   const [CompiledComponent, setCompiledComponent] = useState(null);
 

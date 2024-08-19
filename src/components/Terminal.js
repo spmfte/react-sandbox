@@ -37,7 +37,9 @@ const Terminal = () => {
 
     // Use requestAnimationFrame to ensure the terminal is rendered before fitting
     requestAnimationFrame(() => {
-      fit.fit();
+      if (fit && typeof fit.fit === 'function') {
+        fit.fit();
+      }
       term.focus();
     });
 
@@ -70,14 +72,21 @@ const Terminal = () => {
     if (!fitAddon || !socket) return;
 
     const handleResize = () => {
-      fitAddon.fit();
-      const dimensions = fitAddon.proposeDimensions();
-      if (dimensions && socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify({ type: 'resize', cols: dimensions.cols, rows: dimensions.rows }));
+      if (fitAddon && typeof fitAddon.fit === 'function') {
+        fitAddon.fit();
+      }
+
+      if (socket.readyState === WebSocket.OPEN) {
+        // Use terminal's dimensions if available
+        const { cols, rows } = fitAddon.proposeDimensions() || { cols: 80, rows: 24 };
+        socket.send(JSON.stringify({ type: 'resize', cols, rows }));
       }
     };
 
     window.addEventListener('resize', handleResize);
+
+    // Initial resize
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
