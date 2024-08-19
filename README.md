@@ -37,11 +37,6 @@ This project is a React-based sandbox environment featuring a live code editor, 
 - **WebSocket Server**: Handles real-time communication between the frontend terminal and a bash shell.
 - **Node-PTY**: Powers the terminal sessions, allowing for shell interactions.
 
-### API Endpoints
-
-- **GET `/api/file-system`**: Fetches the file structure of a given directory.
-- **GET `/api/file-content`**: Retrieves the content of a specific file.
-
 ## 📦 Installation
 
 1. Clone the repository:
