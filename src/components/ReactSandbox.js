@@ -3,7 +3,7 @@ import { transform } from '@babel/standalone';
 import Editor from '@monaco-editor/react';
 import Terminal from '../Terminal';
 
-const LiveEditor = () => {
+const ReactSandbox = () => {
   const [code, setCode] = useState(`
 function ExampleComponent() {
   const [count, setCount] = React.useState(0);
@@ -98,4 +98,4 @@ function ExampleComponent() {
   );
 };
 
-export default LiveEditor;
+export default ReactSandbox;

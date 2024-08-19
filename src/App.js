@@ -1,5 +1,5 @@
 import React from 'react';
-import LiveEditor from './components/code-editor/LiveEditor';
+import LiveEditor from './components/ReactSandbox';
 
 function App() {
   return (
