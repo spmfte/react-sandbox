@@ -68,8 +68,3 @@ This project is a React-based sandbox environment featuring a live code editor, 
 ## 📝 License
 
 This project is licensed under the MIT License.
-
----
-
-**Developed by [Aidan Littman](https://github.com/spmfte)**
-
