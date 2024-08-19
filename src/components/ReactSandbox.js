@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { transform } from '@babel/standalone';
 import Editor from '@monaco-editor/react';
-import Terminal from '../Terminal';
+import Terminal from './Terminal';
 
 const ReactSandbox = () => {
   const [code, setCode] = useState(`
