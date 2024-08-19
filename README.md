@@ -10,24 +10,23 @@ This project is a React-based sandbox environment featuring a live code editor, 
 - **WebSocket-Enabled Terminal**: Real-time terminal session powered by `xterm.js` and WebSocket.
 - **Live Preview**: See output changes instantly as you modify the code.
 - **Error Display**: Real-time error feedback for a seamless development experience.
-- **File System API**: Explore and fetch files from the server's file system.
 
 ## 🧩 Components
+
+### `CodeEditor.js`
+- Implements Monaco Editor for a powerful code editing experience.
+- Supports syntax highlighting and auto-completion.
 
 ### `Terminal.js`
 - Integrates `xterm.js` for terminal emulation.
 - Uses WebSocket to connect the terminal to a backend shell.
 - Resizes dynamically based on the window dimensions.
 
-### `RunButton.js` <sub>TODO</sub>
-- A button component to trigger the execution of code.
-- Styled with Tailwind CSS for a responsive and modern look.
-
 ### `ErrorDisplay.js`
 - Displays error messages in a clear and concise manner.
 - Highlights errors in a distinct red color for easy identification.
 
-### `ComponentSandbox.js`
+### `ReactSandbox.js`
 - The main layout component that organizes the code editor and output view.
 - Uses custom hooks for managing code execution and error handling.
 
@@ -41,8 +40,8 @@ This project is a React-based sandbox environment featuring a live code editor, 
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/your-repo.git
-    cd your-repo
+    git clone https://github.com/spmfte/react-sandbox.git
+    cd react-sandbox
     ```
 
 2. Install the dependencies for both frontend and backend:
